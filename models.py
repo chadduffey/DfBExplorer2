@@ -12,10 +12,6 @@ class User(UserMixin, Model):
 	password = CharField(max_length=100)
 	joined_at = DateTimeField(default=datetime.datetime.now)
 	is_admin = BooleanField(default=False)
-	#this will hold the users dropbox auth key
-	dropboxKey = CharField(max_length=200)
-	#this is just in case we need it during development.
-	dropboxField2 = CharField(max_length=200)
 
 	class Meta:
 		database = DATABASE
