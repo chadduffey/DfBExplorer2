@@ -6,6 +6,7 @@ from flask.ext.login import (LoginManager, login_user, logout_user,
 import forms
 import models
 import dropbox
+import urllib2
 
 DEBUG = True
 PORT = 8000
@@ -97,7 +98,15 @@ def index(a=None):
 	if a == None:
 		return "Code: "
 	else:
-		return "Code: " + a
+		#build a urllibrequest to the DfB API
+		request = urllib2.Request('https://api.dropbox.com/1/team/get_info')
+		request.add_header('Content-type', 'application/json')
+		request.add_header('Authorization','Bearer Roti84bECDUAAAAAAAACOhZz6DJtV9g4kWxk2_6gc7GOObK7nrmz1c4ITHm1wlOE')
+		body = str('{}')
+		request.add_data(body)
+		response = urllib2.urlopen(request)
+		data = response.read()
+		return 'linked account: ' + data
 
 if __name__ == '__main__':
 	models.initialize()
