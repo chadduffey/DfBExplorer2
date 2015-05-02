@@ -77,9 +77,10 @@ def login():
 def dfbAuth():
 	form = forms.DfBAuthForm()
 	flow = dropbox.client.DropboxOAuth2FlowNoRedirect(app_key, app_secret)
-	authorize_url = flow.start()	
+	authorize_url = flow.start()
 	if form.validate_on_submit():
-		return redirect(url_for('index'))	
+		DfBAuthKey = form.dfbauthcode.data 
+		return redirect(url_for('index', a=DfBAuthKey))	
 	return render_template('dfbAuth.html', authorize_url=authorize_url, form=form)
 
 @app.route('/logout')
@@ -90,9 +91,13 @@ def logout():
 	return redirect(url_for('login'))
 
 @app.route('/')
+@app.route('/<string:a>')
 @login_required
-def index():
-	return "Main Page"
+def index(a=None):
+	if a == None:
+		return "Code: "
+	else:
+		return "Code: " + a
 
 if __name__ == '__main__':
 	models.initialize()

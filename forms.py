@@ -45,4 +45,4 @@ class LoginForm(Form):
 	password = PasswordField('Password', validators=[DataRequired()])
 
 class DfBAuthForm(Form):
-	authCode = StringField('Enter Authorization Code Here:', validators=[DataRequired()])
+	dfbauthcode = StringField('Enter Authorization Code Here:', validators=[DataRequired()])
