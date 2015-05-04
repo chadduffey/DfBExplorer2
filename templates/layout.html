@@ -18,36 +18,20 @@
     <body>
 
         <header>
+            <div class="row">
+                <div class="grid-33">
+                    <a href="{{ url_for('index') }}" class="icon-logo"></a>
+                </div>
 
-          <div class="row">
+                <div class="grid-33">
+                    <h1>Dropbox for Business Explorer</h1>
+                </div>
 
-            <div class="grid-33">
+                <div class="grid-33">               
+                    <!-- Log in/Log out -->
 
-              <a href="{{ url_for('index') }}" class="icon-logo"></a>
-
+                </div>
             </div>
-
-            <div class="grid-33">
-                
-                <!-- Say Hi -->
-                <h1>Hello {% if current_user.is_authenticated() %}{{ current_user.username }} {%endif %} </h1>
-
-            </div>
-
-            <div class="grid-33">
-                
-                <!-- Log in/Log out -->
-                {% if current_user.is_authenticated() %}
-                <a href="{{ url_for('logout') }}" class="icon-power" title="Log Out"></a>
-                <!- stick other menu items in here ->
-                {% else %}
-                <a href="{{ url_for('login') }}" class="icon-power" title="Log In"></a>
-                <a href="{{ url_for('register') }}" class="icon-user" title="Register"></a>
-                {% endif %}
-            </div>
-
-          </div>
-
         </header>
         
         <!-- Flash messages -->
@@ -60,31 +44,25 @@
         {% endwith %}
 
         <img src="static/img/dropbox.png" alt="Dropbox" style="display: block; margin-right: auto; margin-left: auto;">
-
         <div class="row">
-
-          <div class="main">
-
+            <div class="main">
             <nav>
-
-              <a href="{{ url_for('index') }}">Home</a>
-
+                <a href="{{ url_for('index') }}">Home</a>
+                {% if current_user.is_authenticated() %}
+                <a href="{{ url_for('logout') }}" class="icon-power" title="Log Out">Log Out</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" title="Log In">Log In</a>
+                <a href="{{ url_for('register') }}" title="Register">Register</a>
+                {% endif %}
             </nav>
-
             {% block content %}{% endblock %}
-
-          </div>
-
+            </div>
         </div>
 
         <footer>
-
           <div class="row">
-
             <p>DfB Explorer<br>2015</p>
-
           </div>
-
         </footer>
 
         <script src="/static/js/vendor/disTime.min.js"></script>
