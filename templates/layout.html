@@ -16,23 +16,6 @@
         <![endif]-->
     </head>
     <body>
-
-        <header>
-            <div class="row">
-                <div class="grid-33">
-                    <a href="{{ url_for('index') }}" class="icon-logo"></a>
-                </div>
-
-                <div class="grid-33">
-                    <h1>Dropbox for Business Explorer</h1>
-                </div>
-
-                <div class="grid-33">               
-                    <!-- Log in/Log out -->
-
-                </div>
-            </div>
-        </header>
         
         <!-- Flash messages -->
         {% with messages = get_flashed_messages(with_categories=True) %}
