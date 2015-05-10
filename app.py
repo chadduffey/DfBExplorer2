@@ -3,6 +3,8 @@ from flask.ext.bcrypt import check_password_hash
 from flask.ext.login import (LoginManager, login_user, logout_user, 
 							login_required, current_user)
 
+from flask.ext.bootstrap import Bootstrap
+
 import forms
 import models
 import dropbox
@@ -22,6 +24,8 @@ app.secret_key = 'ooogaboogaoooga'
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+bootstrap = Bootstrap()
 
 @login_manager.user_loader
 def load_user(userid):
@@ -96,7 +100,7 @@ def logout():
 @login_required
 def index(a=None):
 	if a == None:
-		return "Code: "
+		return render_template('main.html', data='{}')
 	else:
 		#build a urllibrequest to the DfB API
 		request = urllib2.Request('https://api.dropbox.com/1/team/get_info')
@@ -106,10 +110,11 @@ def index(a=None):
 		request.add_data(body)
 		response = urllib2.urlopen(request)
 		data = response.read()
-		return 'linked account: ' + data
+		return render_template('main.html', data=data)
 
 if __name__ == '__main__':
 	models.initialize()
+	bootstrap.init_app(app)
 	try:
 		models.User.create_user(
 			username='chadduffey',

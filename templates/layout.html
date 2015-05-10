@@ -32,7 +32,7 @@
             <nav>
                 <a href="{{ url_for('index') }}">Home</a>
                 {% if current_user.is_authenticated() %}
-                <a href="{{ url_for('logout') }}" class="icon-power" title="Log Out">Log Out</a>
+                <a href="{{ url_for('logout') }}">Log Out</a>
                 {% else %}
                 <a href="{{ url_for('login') }}" title="Log In">Log In</a>
                 <a href="{{ url_for('register') }}" title="Register">Register</a>
