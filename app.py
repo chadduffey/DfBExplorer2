@@ -3,7 +3,7 @@ from flask.ext.bcrypt import check_password_hash
 from flask.ext.login import (LoginManager, login_user, logout_user, 
 							login_required, current_user)
 
-from flask.ext.bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 
 import forms
 import models
@@ -25,7 +25,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-bootstrap = Bootstrap()
+Bootstrap(app)
 
 @login_manager.user_loader
 def load_user(userid):
@@ -114,7 +114,6 @@ def index(a=None):
 
 if __name__ == '__main__':
 	models.initialize()
-	bootstrap.init_app(app)
 	try:
 		models.User.create_user(
 			username='chadduffey',
